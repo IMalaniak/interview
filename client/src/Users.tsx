@@ -1,16 +1,22 @@
-import {FC} from "react";
+import axios from "axios";
+import {FC, useEffect, useState} from "react";
+
 
 export const Users: FC = () => {
-  const sort = (key: 'id' | 'name') => {
-  }
+
+  const [data, setData] = useState<any[]>();
+
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get<any[]>('http://localhost:3001/users');
+      setData(res.data);
+    })()
+
+  }, []);
+
 
   return <table>
-    <tr>
-      <th>id</th>
-      <th>name</th>
-      <th>email</th>
-      <th>street</th>
-    </tr>
+
 
   </table>
 }

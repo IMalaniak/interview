@@ -21,9 +21,9 @@ export class Application {
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs));
     app.use(OpenApiValidator.middleware({
       apiSpec: apiDocs as any,
-      validateRequests: true,
-      validateResponses: true,
-      ignoreUndocumented: false,
+      validateRequests: false,
+      validateResponses: false,
+      ignoreUndocumented: true,
     }))
 
     this.routes.registerRoutes(app);
