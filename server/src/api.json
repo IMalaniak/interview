@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MyApi",
+    "description": "All your API belong to us.",
+    "version": "3.14"
+  },
+  "tags": [
+    {
+      "name": "users"
+    }
+  ],
+  "paths": {
+    "/hello": {
+      "get": {
+        "summary": "Hello World",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HelloResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "description": "Get Users List",
+        "responses": {
+          "200": {
+            "description": "Successfully get users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HelloResponse": {
+        "required": [
+          "hello"
+        ],
+        "type": "object",
+        "properties": {
+          "hello": {
+            "type": "string",
+            "example": "world"
+          }
+        }
+      },
+      "Users": {
+        "type": "array",
+        "items": {
+          "required": [
+            "name", "id", "email", "street"
+          ],
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  }
+}
