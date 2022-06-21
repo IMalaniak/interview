@@ -38,8 +38,9 @@ export class Application {
       next(error);
     });
 
-    this.server = app.listen(3001);
-    console.log("server started")
+    const port = 3001
+    this.server = app.listen(port);
+    console.log(`server running on http://localhost:${port}`)
   }
 
   public async stop() {
