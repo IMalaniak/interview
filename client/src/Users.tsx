@@ -20,7 +20,7 @@ export const Users: FC = () => {
      const users = await response.json ()
      setUsers(users);
     }, []);
-    
+
     const [sorting, setSorting] = useState({ field: 'name', ascending: false })
     const sort = ( key: string, ascending: boolean) => {
         setSorting ({ field: 'name', ascending: ascending});
@@ -28,8 +28,8 @@ export const Users: FC = () => {
 
     useEffect(() => {
         const currentUsersCopy = [...users];
-        currentUsersCopy.sort((a: string, b: string) => {
-            return a[sorting.field].localeCompare(b[sorting.field]);
+        currentUsersCopy.sort((a:User, b:User) => {
+            return (a.name < b.name ? -1 : 1);
         });
     }, [users, sort]);
 
