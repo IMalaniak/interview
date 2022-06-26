@@ -1,54 +1,23 @@
 import {FC, useEffect, useState} from "react";
-
-type User = {
-    id: number,
-    name: string,
-    email: string,
-    address: Address,
-}
-
-type Address = {
-    street: string,
-}
+import {User} from "../../server/src/api.model"
 
 export const Users: FC = () => {
     const [users, setUsers]= useState<User[]>([])
     const [currentUsers, setCurrentUsers] = useState([]);
   // @ts-ignore
     useEffect(async() => {
-     const response = await fetch('https://jsonplaceholder.typicode.com/users')
+     const response = await fetch('http://localhost:3001/users')
      const users = await response.json ()
      setUsers(users);
     }, []);
 
-    const [sorting, setSorting] = useState({ field: 'name', ascending: false })
-    const sort = ( key: string, ascending: boolean) => {
-        setSorting ({ field: 'name', ascending: ascending});
-    }
-
-    useEffect(() => {
-        const currentUsersCopy = [...users];
-        currentUsersCopy.sort((a:User, b:User) => {
-            return (a.name < b.name ? -1 : 1);
-        });
-    }, [users, sort]);
-
     return <table>
       <tr>
       <th >id</th>
-      <th onClick={() => sort.name}>name</th>
+      <th>name</th>
       <th>email</th>
       <th>street</th>
     </tr>
-
-    {users.map(user => {
-      return  <tr>
-        <td>{user.id}</td>
-        <td>{user.name}</td>
-        <td>{user.email}</td>
-        <td>{user.address.street}</td>
-      </tr>
-    })}
 
   </table>
 }
